@@ -1,0 +1,66 @@
+a, b, body, dd, del, div, dl, dt, em, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, label, legend, li, ol, p, pre, small, span, strong, u, ul, var, input {
+    margin: 0;
+    padding: 0;
+}
+
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
+
+ul,li，ol{
+    list-style: none;
+}
+
+/* 去掉图片下面的留白问题 */
+img {
+	display: block;
+	/* vertical-align: middle; */
+}
+
+input,
+button {
+	border: 0;
+	border: 1px solid #ccc;
+	outline: none;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #dc353c;
+}
+
+/* 清除浮动的公共类 */
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+
+/* 单行文本溢出以省略号的形式显示 */
+.txt-cut {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* 初始化字体大小 */
+body {
+	font: 12px/1.5 'micorsoft yahei';
+	color: #666;
+}
+
+/* 版心 */
+.w{
+    width: 1000px;
+    margin: 0 auto;
+}
