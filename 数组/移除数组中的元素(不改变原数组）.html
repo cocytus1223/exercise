@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //需求：移除数组 arr 中的所有值与 item 相等的元素。不要直接修改数组 arr，结果返回新的数组
+        
+        function remove(arr, item) {
+            //声明一个新数组保存结果
+            var arr1 = [];
+            //循环遍历
+            for (var i = 0; i < arr.length; i++) {
+                //如果arr[i]不等于item，就加入数组arr1
+                if (arr[i] != item) {
+                    arr1.push(arr[i]);
+                }
+            }
+            return arr1;
+        }
+    </script>
+</body>
+
+</html>

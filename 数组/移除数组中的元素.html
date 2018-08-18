@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //需求：移除数组 arr 中的所有值与 item 相等的元素，直接在给定的 arr 数组上进行操作，并将结果返回
+        
+        function removeWithoutCopy(arr, item) {
+            for (var i = 0; i < arr.length; i++) {
+                if (item == arr[i]) {
+                    arr.splice(i, 1);
+                    i--;
+                }
+            }
+            return arr;
+        }
+
+// splice(index,len,[item])    注释：该方法会改变原始数组。
+// splice有3个参数，它也可以用来替换/删除/添加数组内某一个或者几个值
+// index:数组开始下标        len: 替换/删除的长度       item:替换的值，删除操作的话 item为空
+
+// 如：arr = ['a','b','c','d']
+// 删除 ----  item不设置
+// arr.splice(1,1)   //['a','c','d']         删除起始下标为1，长度为1的一个值，len设置的1，如果为0，则数组不变
+// arr.splice(1,2)  //['a','d']          删除起始下标为1，长度为2的一个值，len设置的2
+
+// 替换 ---- item为替换的值
+// arr.splice(1,1,'ttt')        //['a','ttt','c','d']         替换起始下标为1，长度为1的一个值为‘ttt’，len设置的1
+// arr.splice(1,2,'ttt')        //['a','ttt','d']         替换起始下标为1，长度为2的两个值为‘ttt’，len设置的1
+
+// 添加 ----  len设置为0，item为添加的值
+// arr.splice(1,0,'ttt')        //['a','ttt','b','c','d']         表示在下标为1处添加一项‘ttt’
+    </script>
+</body>
+
+</html>
