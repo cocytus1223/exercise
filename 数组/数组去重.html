@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+
+        // 数组去重
+        var arr = [1, 2, 3, 4, 5, 6, 4, 3, 2, 1];
+        var newArr = [];
+        // newArr = [1,2,3,4,5,6];
+
+        // 思路：
+        // 1、先将老数组拷贝到新数组里面去
+        // 2、在拷贝的过程中 如果这个数不在新数组中 才拷贝
+        // 在：只要有一个值相等就存在
+        // 不在：必须和数组里面的每一个都比较了之后并且都不相等才不存在
+
+
+        for (var i = 0; i < arr.length; i++) {
+            // 每一轮开始都应该是先假设不存在
+            var flag = false;
+            for (var j = 0; j < newArr.length; j++) {
+                if (arr[i] == newArr[j]) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                newArr.push(arr[i]);
+            }
+        }
+
+        console.log(newArr);
+
+    </script>
+</body>
+
+</html>
