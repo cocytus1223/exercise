@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <style>
+    .red {
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <button>按钮1</button>
+  <button>按钮2</button>
+  <button>按钮3</button>
+  <button>按钮4</button>
+  <button>按钮5</button>
+
+  <script>
+    //需求：给多个按钮注册点击事件，点击的那个变成红色。 
+    //1. 获取元素
+    var btns = document.getElementsByTagName('button');
+    //2. 注册事件
+    for (var i = 0; i < btns.length; i++) {
+      // 注册事件的处理函数, 不会立马执行,触发的时候才会执行
+      btns[i].onclick = function () {
+        // btns[i].className = 'red';
+        // 不要出现i : 外面一个for循环, 里面事件,事件里面不要出现i
+        // console.log(i);
+
+        //3. 排他思想
+        //1. 干掉所有人
+        for (var i = 0; i < btns.length; i++) {
+
+          btns[i].className = '';
+        }
+
+        //2. 复活我自己
+        this.className = 'red';
+
+      }
+    }
+  </script>
+</body>
+
+</html>
