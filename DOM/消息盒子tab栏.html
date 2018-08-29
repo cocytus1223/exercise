@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+
+
+    .box {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #000;
+    }
+
+    ul {
+      list-style: none;
+      height: 60px;
+    }
+
+    ul li {
+      float: left;
+      width: 20%;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      background: pink;
+    }
+
+    ul li.now {
+      background: green;
+    }
+
+    article {
+
+      width: 400px;
+      height: 340px;
+      text-align: center;
+      line-height: 340px;
+      font-size: 100px;
+      display: none;
+    }
+
+    article.current {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <ul>
+      <li class="now">导航1</li>
+      <li>导航2</li>
+      <li>导航3</li>
+      <li>导航4</li>
+      <li>导航5</li>
+    </ul>
+    <article class="current">内容1</article>
+    <article>内容2</article>
+    <article>内容3</article>
+    <article>内容4</article>
+    <article>内容5</article>
+  </div>
+  <script>
+    var lis = document.querySelectorAll('ul li');
+    var articles = document.querySelectorAll('article');
+
+    for (i = 0; i < lis.length; i++) {
+      var li = lis[i];
+      setTab(li, i);
+    }
+
+    function setTab(li, i) {
+      li.onclick = function () {
+        for (i = 0; i < lis.length; i++) {
+
+          if (lis[i].getAttribute('class')) {
+            lis[i].removeAttribute('class');
+          }
+        }
+
+        li.setAttribute('class', 'now');
+
+        for (i = 0; i < articles.length; i++) {
+
+          if (articles[i].getAttribute('class')) {
+            articles[i].removeAttribute('class');
+          }
+        }
+        articles[i].setAttribute('class', 'current');
+
+      }
+    }
+  </script>
+</body>
+
+</html>
