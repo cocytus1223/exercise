@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+    
+    body {
+      background-image: url(images/1.jpg);
+    }
+    
+    #mask {
+      background-color: rgba(255, 255, 255, 0.3);
+      height: 200px;
+      text-align: center;
+    }
+    
+    #mask img {
+      width: 200px;
+      margin-top: 35px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="mask">
+  <img src="images/1.jpg" alt="">
+  <img src="images/2.jpg" alt="">
+  <img src="images/3.jpg" alt="">
+  <img src="images/4.jpg" alt="">
+  <img src="images/5.jpg" alt="">
+</div>
+
+<script>
+
+  // 思路 :
+  //1. 获取全部的img 注册点击事件
+  //2. 点击获取 每个图片的src
+  //3. 赋值body的背景
+
+   //1. 获取元素
+   var imgs = document.querySelectorAll('img');
+
+   //2. 注册事件
+   for ( var i = 0 ; i < imgs.length ; i++) {
+   
+       imgs[i].onclick = function () {
+         
+         //3. 获取src
+         console.log(this.src);
+
+         //4. 赋值给body的背景
+         // 背景图片 : url(路径)
+         document.body.style.background = 'url('+ this.src +')';
+         
+       }
+   }
+
+
+</script>
+</body>
+</html>
