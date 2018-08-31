@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0 auto;
+      padding: 0px;
+      font-size: 12px;
+      background: url(images/bg.gif) repeat center 36px;
+      text-align: center;
+      background-color: #c30230;
+    }
+
+    #content {
+      margin: 0 auto;
+      width: 960px;
+      background: url(images/content_bg.jpg) no-repeat left top;
+      height: 627px;
+      position: relative;
+    }
+
+    #content .tip1 {
+      position: absolute;
+      width: 227px;
+      left: 0px;
+      top: 0px;
+    }
+
+    #content .tip1 .tip_h {
+      background: url(images/tip1_h.gif) no-repeat left top;
+    }
+
+    #content .tip1 .tip_h {
+      width: 227px;
+      padding-top: 45px;
+      height: 23px;
+      text-align: left;
+      cursor: move;
+    }
+
+    #content .tip1 .tip_c {
+      background: url(images/tip1_c.gif) repeat-y;
+    }
+
+    #content .tip1 .tip_c {
+      width: 200px;
+      padding-left: 12px;
+      padding-right: 15px;
+      min-height: 40px;
+      text-align: left;
+      line-height: 20px;
+      max-height: 160px;
+      word-wrap: break-word;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    #content .tip1 .tip_f {
+      background: url(images/tip1_f.gif) no-repeat left top;
+    }
+
+    #content .tip1 .tip_f {
+      width: 227px;
+      height: 53px;
+      padding-top: 20px;
+    }
+
+    #content .close {
+      float: left;
+      font-size: 12px;
+      cursor: pointer;
+      color: #000000;
+    }
+
+    .clr {
+      clear: both;
+      overflow: auto;
+      display: block;
+      height: 0px;
+    }
+
+    #content .icon {
+      float: left;
+      width: 35px;
+      padding-left: 15px;
+      height: 35px;
+      text-align: center;
+    }
+
+    #content .name {
+      float: right;
+      padding-right: 15px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 35px;
+      color: #C0F;
+    }
+
+    #content .num {
+      float: left;
+      padding-left: 7px;
+      width: 195px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <div class="tip1">
+      <div class="tip_h" title="双击关闭纸条">
+        <div class="num">第[1223]条 2018-08-30 22:51:52</div>
+        <div class="close" title="关闭纸条">×</div>
+        <div class="clr"></div>
+      </div>
+      <div class="tip_c">
+        never stop dreaming!
+      </div>
+      <div class="tip_f">
+        <div class="icon">
+          <img src="images/bpic_1.gif" alt="" title="">
+        </div>
+        <div class="name">碳酸注入</div>
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 功能1 : 克隆标签页10个,随机分布
+    //1.1 获取元素
+    var tip = document.querySelector('.tip1');
+    var content = document.querySelector('#content');
+    //1.2 遍历克隆10个
+    for (var i = 0; i <= 10; i++) {
+      //1.3 克隆标签页
+      //1.3.1 克隆tip
+      var newTip = tip.cloneNode(true);
+      //1.3.2 设置tip (随机分布)
+      //- 随机left和top 733*446
+      var x = parseInt(Math.random() * 734);
+      var y = parseInt(Math.random() * 447);
+      //-left和top重新赋值
+      newTip.style.left = x + 'px';
+      newTip.style.top = y + 'px';
+      //1.3.3 添加tip
+      content.appendChild(newTip);
+
+    }
+
+
+    // 功能2 : 获取所有的tip, 注册点击事件 , 提高层级
+    var tips = content.children;
+    var count = 0;
+    for (var i = 0; i < tips.length; i++) {
+
+      tips[i].onclick = function () {
+        // 提高层级
+        count++;
+        this.style.zIndex = count;
+      }
+    }
+
+
+    // 功能3 : 获取所有的x, 注册点击事件, 删除当前的tip
+    var closes = document.querySelectorAll('.close');
+    //3.1. 获取所有的x
+    for (var i = 0; i < closes.length; i++) {
+      //3.2 注册事件    
+      closes[i].onclick = function () {
+        // 删除tip 
+        // 父元素.removeChild(子元素)
+        // content.removeChild(tip)
+        content.removeChild(this.parentNode.parentNode);
+      }
+
+    }
+
+
+    // 功能4 : 双击tip的头部, 删除当前的tip
+    //4.1 获取所有tip的头部
+    var tip_hs = document.querySelectorAll('.tip_h');
+    //4.2 遍历注册双击事件
+    for(var i = 0; i < tip_hs.length ; i++) {
+      tip_hs[i].ondblclick = function(){
+    // 删除当前的tip
+    // 父元素.removeChild(子元素)
+    // content.removeChild(tip)
+    content.removeChild(this.parentNode);
+      }
+         
+    }
+
+  </script>
+</body>
+
+</html>
