@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#accordion {
+  width: 1200px;
+  height: 400px;
+  margin: 100px auto;
+  border: 2px solid pink;
+  position: relative;
+  overflow: hidden;
+}
+
+#accordion li {
+  width: 1200px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
