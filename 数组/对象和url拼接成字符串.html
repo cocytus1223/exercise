@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <script>
+    //有一个对象{name:'zs',id:100}和一个连接http://www.baidu.com，拼接成字符串http://www.baidu.com?name=zs&id=100
+
+    function setSearch(object, str) {
+      var str = str + '?';
+      var arr = [];
+      for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+          arr.push(key + '=' + object[key])
+        }
+      }
+      return str + arr.join('&');
+    }
+
+    var obj = {
+      name: 'zs',
+      id: 100,
+    }
+
+    var str = 'http://www.baidu.com';
+    console.log(setSearch(obj, str));
+  </script>
+</body>
+
+</html>
