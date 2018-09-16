@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <script>
+    // 统计一个字符串中每个字符出现的次数
+
+    str = 'asdfssaaasasasasaa';
+
+    function totalCount(str) {
+      var arr = str.split('');
+      var obj = {};
+
+      arr.forEach(function (v, i) {
+        if (!obj[v]) {
+          obj[v] = 1;
+        } else {
+          obj[v]++;
+        }
+      });
+
+      return obj;
+    }
+
+    console.log(totalCount(str));
+  </script>
+</body>
+
+</html>
