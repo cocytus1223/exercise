@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #map {
+      width: 800px;
+      height: 500px;
+      background-color: #ccc;
+      margin: 50px auto 0;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+  <script src="food.js"></script>
+  <script src="snake.js"></script>
+  <script>
+    var map = document.querySelector("#map");
+
+    function Game() {
+      this.food = new Food();
+      this.snake = new Snake();
+    }
+
+    Game.prototype.startGame = function () {
+      this.snake.render(map);
+      this.food.render(map);
+
+      var that = this;
+
+      var timeId = setInterval(function () {
+        that.snake.move(map,that.food);
+
+        var newHead = that.snake.body[0];
+        if (
+          newHead.x < 0 || newHead.y < 0 || newHead.x > map.offsetWidth / that.snake.width - 1 || newHead.y > map
+          .offsetHeight / that.snake.height - 1
+        ) {
+          alert("Game Over");
+          clearInterval(timeId);
+        }
+        for(var i = 1; i < that.snake.body.length ; i++) {
+        
+             var item = that.snake.body[i];
+             if(newHead.x === item.x && newHead.y === item.y){
+               alert("Game Over");
+               clearInterval(timeId);
+             }
+        }
+      }, 100)
+
+
+
+      document.addEventListener("keyup", function (e) {
+        switch (e.keyCode) {
+          case 37:
+            if (that.snake.direction === "right") {
+              return;
+            }
+            that.snake.direction = "left";
+            break;
+          case 38:
+            if (that.snake.direction === "down") {
+              return;
+            }
+            that.snake.direction = "up";
+            break;
+          case 39:
+            if (that.snake.direction === "left") {
+              return;
+            }
+            that.snake.direction = "right";
+            break;
+          case 40:
+            if (that.snake.direction === "up") {
+              return;
+            }
+            that.snake.direction = "down";
+            break;
+        }
+      })
+    }
+
+
+
+    var g = new Game();
+    g.startGame();
+  </script>
+</body>
+
+</html>
