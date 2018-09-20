@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .wrap {
+      width: 330px;
+      height: 30px;
+      margin: 100px auto 0;
+      padding-left: 10px;
+      background-image: url(imgs/bg.jpg);
+    }
+
+    .wrap li {
+      background-image: url(imgs/libg.jpg);
+    }
+
+    .wrap>ul>li {
+      float: left;
+      margin-right: 10px;
+      position: relative;
+    }
+
+    .wrap a {
+      display: block;
+      width: 100px;
+      height: 30px;
+      text-decoration: none;
+      color: #000;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    .wrap li ul {
+      position: absolute;
+      top: 30px;
+      display: none;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div class="wrap">
+    <ul>
+      <li>
+        <a href="javascript:void(0);">一级菜单1</a>
+        <ul class="ul">
+          <li><a href="javascript:void(0);">二级菜单11</a></li>
+          <li><a href="javascript:void(0);">二级菜单12</a></li>
+          <li><a href="javascript:void(0);">二级菜单13</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:void(0);">一级菜单2</a>
+        <ul class="ul">
+          <li><a href="javascript:void(0);">二级菜单21</a></li>
+          <li><a href="javascript:void(0);">二级菜单22</a></li>
+          <li><a href="javascript:void(0);">二级菜单23</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:void(0);">一级菜单3</a>
+        <ul class="ul">
+          <li><a href="javascript:void(0);">二级菜单31</a></li>
+          <li><a href="javascript:void(0);">二级菜单32</a></li>
+          <li><a href="javascript:void(0);">二级菜单33</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <script src="../jquery-1.12.4.js"></script>
+  <script>
+    $(function () {
+      // 1. 获取一级菜单li元素
+      var $li = $(".wrap>ul>li");
+      // 2. 给li注册 mouseover
+      $li.mouseenter(function () {
+        console.log("mouseeter");
+        // 3. 让当前的li下的ul展示（show()）
+        $(this).children("ul").show();
+      });
+      // 4. 给li 注册 mouseleave
+      $li.mouseleave(function () {
+        console.log("mouseleave");
+        // 5. 让当前的li下的ul隐藏（hide()）
+        $(this).children("ul").hide();
+      });
+    })
+  </script>
+</body>
+
+</html>
