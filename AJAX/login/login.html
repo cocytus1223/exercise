@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+</head>
+
+<body>
+  用户名：<input type="text" id="txt">
+  密码：<input type="password" id="pd">
+  <button id="btn">登录</button>
+  <script>
+    // 1. 给按钮注册点击事件
+    btn.onclick = function () {
+      // 2. 获取用户名和密码
+      var uname = txt.value;
+      var psw = pd.value;
+      // 3. 通过ajax发送给服务器 post
+      var xhr = new XMLHttpRequest();
+      xhr.open('post', 'login.php');
+      //post请求一定要设置请求头
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      xhr.send('uname=' + uname + '&psw=' + psw);
+      // 4. 根据服务器返回的结果判断后面的逻辑
+      xhr.onreadystatechange = function () {
+        // 判断响应是否完成
+        if (xhr.readyState == 4) {
+          // 判断是否响应成功
+          if (xhr.status == 200) {
+            // 获取服务器响应的内容
+            var content = xhr.responseText;
+            if (content === 'yes') {
+              // location.replace(url) 可以页面跳转，不存储历史记录
+              // location.assign(url) 可以页面跳转，存储历史记录
+              location.href = 'home.html';
+            } else {
+              alert('用户名或密码错误')
+            }
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
