@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #F7F7F7;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    .chatbox {
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
+      border: 1px solid #CCC;
+      background-color: #FFF;
+      border-radius: 5px;
+    }
+
+    .messages {
+      height: 350px;
+      padding: 20px 40px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #CCC;
+      overflow: scroll;
+    }
+
+    .messages h5 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .messages p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .self {
+      text-align: right;
+    }
+
+    .other {
+      text-align: left;
+    }
+
+    .form {
+      height: 150px;
+    }
+
+    .form .input {
+      height: 110px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .form .btn {
+      height: 40px;
+      box-sizing: border-box;
+      border-top: 1px solid #CCC;
+    }
+
+    .form textarea {
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: none;
+      resize: none;
+      outline: none;
+      font-size: 20px;
+    }
+
+    .form input {
+      display: block;
+      width: 100px;
+      height: 30px;
+      margin-top: 5px;
+      margin-right: 20px;
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>简单的Ajax实例</h3>
+  <div class="chatbox">
+    <!-- 聊天内容 -->
+    <div class="messages">
+      <div class="self">
+        <h5>我说</h5>
+        <p>你好</p>
+      </div>
+      <div class="other">
+        <h5>对方说</h5>
+        <p>你好</p>
+      </div>
+    </div>
+    <div class="form">
+      <div class="input">
+        <textarea name="" id="texta" cols="30" rows="10"></textarea>
+      </div>
+      <button id="btn" value="发送">发送</button>
+    </div>
+  </div>
+  <script>
+    //1. 获取元素
+    var messages = document.querySelector('.messages');
+    var texta = document.querySelector('#texta');
+    var btn = document.querySelector('#btn');
+    // 2. 给按钮注册点击事件
+    btn.onclick = function () {
+      //获取textarea里面的文本，然后动态创建元素添加到message里面
+      var content = texta.value;
+
+      //动态创建元素
+      var div = document.createElement('div');
+      div.className = 'self';
+      var h5 = document.createElement('h5');
+      h5.innerText = '我说';
+      div.appendChild(h5);
+      var p = document.createElement('p');
+      p.innerText = content;
+      div.appendChild(p);
+
+      messages.appendChild(div);
+      //清空文本域的内容
+      texta.value = '';
+
+      //发送请求
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('post', 'talking.php');
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      xhr.send('mesg=' + content);
+
+      //接收信息
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            //获取服务器返回的数据
+            var response = xhr.responseText;
+            //动态创建元素
+            var div = document.createElement('div');
+            div.className = 'other';
+            var h5 = document.createElement('h5');
+            h5.innerText = '对方说';
+            div.appendChild(h5);
+            var p = document.createElement('p');
+            p.innerText = response;
+            div.appendChild(p);
+
+            messages.appendChild(div);
+
+            //让新的数据展示在可视区域中
+            div.scrollIntoView();
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
