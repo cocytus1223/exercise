@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <input type="text" id="txt"><span id="tip"></span>
+  <script>
+    // 1. 文本框失去焦点发送请求
+    txt.onblur = function () {
+      // 2. 利用ajax发送请求
+      // 2.1 创建对象
+      var xhr = new XMLHttpRequest();
+      // 2.2 设置请求行
+      xhr.open('get', 'unamehave.php?uname=' + this.value)
+      // 2.3 发送请求
+      xhr.send()
+      // 3. 接收响应，根据响应渲染不同的提示文本
+      xhr.onreadystatechange = function () {
+        // 响应完毕才做后面的事情
+        if (xhr.readyState == 4) {
+          //判断是否响应成功 200是成功
+          if (xhr.status == 200) {
+            //获取服务器返回的内容
+            var content = xhr.responseText;
+            //根据内容给tip添加不同的文本
+            if (content === 'yes') {
+              //证明有了
+              tip.innerText = '该用户名已存在'
+              tip.style.color = 'red'
+            } else {
+              //证明没有 可用
+              tip.innerText = '该用户名可用'
+              tip.style.color = 'green'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
