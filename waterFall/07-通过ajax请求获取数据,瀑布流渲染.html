@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>07-通过ajax请求获取数据,瀑布流渲染</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Microsoft Yahei";
+    }
+
+    .box {
+      position: relative;
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    .item {
+      width: 232px;
+      position: absolute;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .item>img {
+      width: 100%;
+      display: block;
+    }
+
+    .item>p {
+      margin: 0;
+      padding: 10px;
+      background: #eee;
+    }
+
+    .btn {
+      width: 280px;
+      height: 40px;
+      margin: 30px auto;
+      text-align: center;
+      line-height: 40px;
+      background-color: #CCC;
+      border-radius: 6px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .loading {
+      background-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <!--  -->
+
+  </div>
+
+  <div class="btn">加载更多</div>
+
+  <script src="js/jquery-1.12.4.js"></script>
+  <script src="water-fall.js"></script>
+  <!-- 引入art-template模板引擎 -->
+  <script src="js/template-web.js"></script>
+  <!-- 创建模板 -->
+  <script type="text/html" id="tmp">
+    {{each items v i}}
+      <div class="item ">
+        <!-- 如果img标签不写width/height img的高度由图片撑开 
+        如果没有拿到图片就不占位置,
+      如果我们写了宽和高, 就算还没有拿到图片,也会把位置先占住-->
+        <img src="{{v.path}}" alt="" width="{{v.width}}" height="{{v.height}}">
+        <p>{{v.text}}</p>
+      </div>
+    {{/each}}
+  </script>
+  <script>
+    // 向服务器发送请求,获取数据,根据数据拼接html字符串,把拼接好的每一item的html字符串渲染到页面上,然后在调用waterFall插件,实现瀑布流效果
+    // 发送请求前,定义变量
+    var page = 1; //第一次进行获取第一页的数据
+    var pageSize = 10;
+    // 1.给加载更多注册点击事件
+    $('.btn').click(function () {
+      // 判断是否有loading这个类名,如果有,证明正在发送则不能在请求服务器了
+      // 如果没有则去请求服务器,执行下面的代码
+      if ($(this).hasClass('loading')) {
+        return;
+      }
+
+      // 2.在事件处理函数中,发送ajax请求
+
+      // 3. 一旦发送出去之后,按钮文本修改为'正在请求', 并且不能重复点击
+      $(this).text('正在请求...').addClass('loading');
+      $.ajax({
+        url: 'data.php',
+        // 如果type不写,默认也是get请求
+        type: 'get',
+        data: {
+          // 数据的页数
+          page: page,
+          // 一页中几条数据
+          pageSize: pageSize
+        },
+        dataType: 'json',
+        success: function (res) {
+          // 4. 如果成功接收到了数据,那么就利用模板引擎拼接html字符串
+          console.log(res);
+          // 判断有没有数据,如果没有数据就提示不要请求了,也不能点击了
+          if (res.items.length == 0) {
+            // 提示,并且禁用按钮
+            $('.btn').text('没有数据了').addClass('loading');
+            return;
+          }
+          // 调用template方法
+          // 修改了下一次访问数据的页数
+          page = res.page;
+          var htmlStr = template('tmp', res);
+          // console.log(htmlStr);
+          // 5. 拼接完之后,渲染到页面上
+          $('.box')[0].innerHTML += htmlStr;
+          // 6. 调用瀑布流插件,以瀑布流的形式展示
+          $('.box').waterFall();
+          // 7. 记得恢复按钮
+          $('.btn').text('加载更多').removeClass('loading');
+        }
+
+      })
+
+    })
+  </script>
+</body>
+
+
+</html>
