@@ -1,0 +1,145 @@
+@import "variable";
+
+.jd_goods {
+  margin-top: 20px;
+  background-color: #fff;
+
+  .jd_checkbox {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 5px;
+    top: 7px;
+    background-position: -180px -90px;  // 不选中状态
+
+    &.checked {
+      background-position: -180px -70px;  // 选中状态
+    }
+  }
+}
+
+// 商品头部
+.goods_title {
+  height: 34px;
+  border-top: 1px solid @borderColor;
+  border-bottom: 1px solid @borderColor;
+  padding-left: 34px;
+  position: relative;
+  line-height: 32px;
+
+  > .fl {
+    padding-left: 20px;
+    position: relative;
+
+    i {
+      position: absolute;
+      left: -3px;
+      top: 8px;
+      width: 20px;
+      height: 20px;
+      transform: scale(0.75);
+    }
+  }
+
+  > .fr {
+    padding-right: 10px;
+  }
+}
+
+// 商品内容
+.goods_content {
+  height: 100px;
+  border-bottom: 1px solid @borderColor;
+  padding-left: 34px;
+  position: relative;
+
+  // 左侧的图片模块
+  .goods_img {
+    float: left;
+    width: 80px;
+    height: 100%;
+    padding-top: 10px;
+  }
+
+  // 右侧的信息说明
+  .goods_info {
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    padding: 10px;
+
+    .info_bottom {
+      height: 34px;
+      width: 100%;
+      padding: 0 10px;
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+
+      // 数字框
+      .number_box {
+        width: 120px;
+        height: 34px;
+        border: 1px solid @borderColor;
+
+        > div {
+          float: left;
+          width: 33.3%;
+          height: 100%;
+          text-align: center;
+          line-height: 32px;
+
+          &:nth-child(2) {
+            border-left: 1px solid @borderColor;
+            border-right: 1px solid @borderColor;
+
+            input {
+              width: 100%;
+              height: 100%;
+              display: block;
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      // 垃圾桶
+      .delete_box {
+        width: 20px;
+        height: 22px;
+        margin-top: 5px;
+
+        &.current {
+
+          // 让子元素盖子飞起
+          .delete_up {
+            transform: rotate(30deg);
+          }
+
+        }
+
+        // 盖子
+        .delete_up {
+          width: 18px;
+          height: 4px;
+          background: url("../images/delete_up.png");
+          background-size: 18px 4px;
+          // 设置旋转基准点
+          transform-origin: right bottom;
+          // 设置过渡
+          transition: transform 1s;
+        }
+
+        // 桶
+        .delete_down {
+          width: 18px;
+          height: 18px;
+          background: url("../images/delete_down.png");
+          background-size: 18px 18px;
+          margin-top: -2px;
+        }
+
+      }
+    }
+  }
+}

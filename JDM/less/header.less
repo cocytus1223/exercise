@@ -1,0 +1,40 @@
+// 维护 less 时, 不要去修改 css, 修改了 css, 将来也会被 less 重新编译的 覆盖
+
+.jd_header {
+  width: 100%;
+  height: 44px;
+  position: fixed;
+  top: 0;
+  background-image: linear-gradient(to bottom, #fff, #ccc);
+  max-width: 640px;
+  padding: 0 44px;
+  z-index: 999;
+
+  .icon_left,
+  .icon_right {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 0;
+    padding: 12px;
+    // 设置背景显示范围, 只在内容显示
+    background-clip: content-box;
+    // 设置背景定位的原点
+    background-origin: content-box;
+  }
+  .icon_left {
+    left: 0;
+    background-position: -20px 0;
+  }
+  .icon_right {
+    right: 0;
+    background-position: -60px 0;
+  }
+
+  .title {
+    line-height: 44px;
+    text-align: center;
+    font-size: 18px;
+  }
+}
+

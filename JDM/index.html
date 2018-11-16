@@ -4,8 +4,7 @@
 <head>
   <title>Document</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -19,7 +18,7 @@
       <div class="logo jd_sprite"></div>
       <div class="search">
         <i class="jd_sprite"></i>
-        <input type="text" placeholder="上海黑马30期">
+        <input type="text" placeholder="7777777">
       </div>
       <div class="login">
         <a href="#">登录</a>
@@ -28,6 +27,7 @@
 
     <!-- 轮播区域 -->
     <div class="jd_banner">
+      <!-- 一定要清除浮动 -->
       <ul class="clearfix">
         <!-- 由于 移动端可以左右滑动查看, 需要两张假图 -->
         <li><a href="#"><img src="./images/banner08.jpg" alt=""></a></li>
@@ -44,14 +44,12 @@
         <li><a href="#"><img src="./images/banner01.jpg" alt=""></a></li>
       </ul>
 
-
       <!-- 小圆点 -->
       <ol>
         <li class="current"></li>
         <li></li>
         <li></li>
         <li></li>
-
         <li></li>
         <li></li>
         <li></li>
@@ -257,6 +255,7 @@
   </div>
 
   <!-- 引入js文件 -->
+  <script src="js/iscroll.js"></script>
   <script src="js/index.js"></script>
 </body>
 

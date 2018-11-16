@@ -1,18 +1,21 @@
 // 功能1: 页面滚动, 改变头部透明度
 
-;
-(function () {
+;(function () {
   var jd_header = document.querySelector('.jd_header');
+
   window.addEventListener("scroll", function () {
     // 获取页面卷去的高度 pageYOffset
     var scrollTop = window.pageYOffset;
     var opacity = 0;
+
     if (scrollTop > 600) {
       opacity = 0.9;
     } else {
+      // 动态的计算透明度
       opacity = scrollTop / 600 * 0.9;
     }
 
+    // 设置给头部
     jd_header.style.backgroundColor = "rgba(222,24,27," + opacity + ")";
   })
 })();
@@ -20,10 +23,18 @@
 // 功能2: 动态设置秒杀底部 ul 的宽度
 ;
 (function () {
+  // 获取元素
   var ul = document.querySelector('.seckill_content ul');
   var lis = ul.children;
   var width = lis.length * lis[0].offsetWidth;
   ul.style.width = width + "px";
+
+  // 需要在动态计算渲染完成 ul 之后, 再进行初始化
+  new IScroll(".seckill_content", {
+    scrollX: true,
+    scrollY: false
+  });
+
 })();
 
 // 功能3: 倒计时功能
@@ -35,7 +46,7 @@
 
   function setTime() {
     // 秒杀时间
-    var seckillTime = new Date("2018/11/08 20:00");
+    var seckillTime = new Date("2018/11/11 20:00");
     // 当前时间
     var now = new Date();
     // 需要倒计时的时间的秒数
@@ -238,8 +249,6 @@
   });
 
   // resize 事件, 当屏幕可视区域发生改变时触发
-  // 解决屏幕 resize 后, width 变换的问题
-  // 需要在 reisze后, 动态更新全局的 width
   window.addEventListener("resize", function () {
 
     // 动态更新 width

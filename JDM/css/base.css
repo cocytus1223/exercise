@@ -99,8 +99,10 @@ em, i {
 
 /* 定义复用的精灵图类 */
 .jd_sprite {
-  /* 精灵图 */
+  /* 精灵图默认使用这个背景 */
   background: url("../images/jd-sprites.png") no-repeat 0 0;
-  /* 这个背景是一个二倍图 */
+  /* 这个背景是一个2倍图 */
   background-size: 200px 200px;
 }
+
+
